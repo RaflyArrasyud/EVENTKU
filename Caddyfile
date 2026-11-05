@@ -1,0 +1,26 @@
+{
+    admin off
+    persist_config off
+    auto_https off
+    log {
+        output stderr
+        format json
+        level WARN
+    }
+    frankenphp {
+        num_threads 4
+    }
+}
+
+:{$PORT:8080} {
+    root * /app/public
+    encode gzip
+
+    # Healthcheck avoids sessions and database writes; normal pages are also
+    # verified after deployment. The public root contains no secrets/database.
+    respond /healthz "ok" 200
+    @private path /.env* /.git/* /database/* /storage/bukti/*
+    respond @private 404
+
+    php_server
+}

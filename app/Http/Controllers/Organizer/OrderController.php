@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -26,16 +25,15 @@ class OrderController extends Controller
             return back()->with('error', 'Pesanan ini sudah diproses.');
         }
 
-        $order->update(['status' => 'lunas']);
+        abort_if($order->isGatewayPayment(), 403, 'Pesanan gateway tidak dapat disetujui manual.');
 
-        if ($order->tickets()->count() === 0) {
-            for ($i = 0; $i < $order->jumlah; $i++) {
-                $order->tickets()->create([
-                    'kode' => strtoupper(Str::random(10)),
-                    'status' => 'aktif',
-                ]);
-            }
+        $attrs = ['status' => 'lunas'];
+        if (Order::supportsPaidAt()) {
+            $attrs['paid_at'] = now();
         }
+        $order->update($attrs);
+
+        $order->issueTickets();
 
         return back()->with('success', 'Pembayaran disetujui, tiket dibuat.');
     }
@@ -47,6 +45,8 @@ class OrderController extends Controller
         if ($order->status !== 'menunggu') {
             return back()->with('error', 'Pesanan ini sudah diproses.');
         }
+
+        abort_if($order->isGatewayPayment(), 403, 'Pesanan gateway tidak dapat ditolak manual.');
 
         $order->update(['status' => 'batal']);
 

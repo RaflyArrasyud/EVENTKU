@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 64" role="img" aria-labelledby="eventkuLogoLightTitle">
+  <title id="eventkuLogoLightTitle">EventKu</title>
+  <defs><mask id="cutout-light"><rect width="64" height="64" fill="white" /><line x1="44" y1="20" x2="44" y2="44" stroke="black" stroke-width="4" stroke-dasharray="0 6" stroke-linecap="round" /><path d="M 18 32 L 24 38 L 34 26" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></mask></defs>
+  <path d="M 12 16 H 52 A 4 4 0 0 1 56 20 V 28 A 4 4 0 0 0 56 36 V 44 A 4 4 0 0 1 52 48 H 12 A 4 4 0 0 1 8 44 V 36 A 4 4 0 0 0 8 28 V 20 A 4 4 0 0 1 12 16 Z" fill="#111111" mask="url(#cutout-light)" />
+  <text x="68" y="42" font-family="Outfit, Inter, ui-sans-serif, sans-serif" font-size="30" font-weight="800" letter-spacing="-0.5" fill="#111111">Event<tspan fill="#7FB069">Ku</tspan></text>
+</svg>

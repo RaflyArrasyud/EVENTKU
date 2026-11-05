@@ -10,25 +10,34 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@eventku.test',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@eventku.test'],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ]
+        );
 
-        User::create([
-            'name' => 'Organizer Demo',
-            'email' => 'organizer@eventku.test',
-            'password' => Hash::make('password'),
-            'role' => 'organizer',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'organizer@eventku.test'],
+            [
+                'name' => 'Organizer Demo',
+                'password' => Hash::make('password'),
+                'role' => 'organizer',
+                'email_verified_at' => now(),
+            ]
+        );
 
-        User::create([
-            'name' => 'Peserta Demo',
-            'email' => 'peserta@eventku.test',
-            'password' => Hash::make('password'),
-            'role' => 'peserta',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'peserta@eventku.test'],
+            [
+                'name' => 'Peserta Demo',
+                'password' => Hash::make('password'),
+                'role' => 'peserta',
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }

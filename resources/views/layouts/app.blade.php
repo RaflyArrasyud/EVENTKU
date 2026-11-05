@@ -8,15 +8,24 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
+        <script>
+            // Samakan tema gelap/terang dengan homepage (localStorage, default ikut OS).
+            try {
+                var t = localStorage.getItem('eventku-theme');
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased text-gray-900 dark:text-neutral-200">
+        <div class="min-h-screen bg-gray-100 dark:bg-deep">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-white dark:bg-card shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>

@@ -6,9 +6,34 @@
 
 @layer utilities {
     .glass {
-        @apply bg-white/70 backdrop-blur-lg border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.08)];
+        @apply bg-white/95 border border-slate-200/80 shadow-md;
     }
     .glass-dark {
-        @apply bg-slate-900/70 backdrop-blur-lg border border-white/10 shadow-xl;
+        @apply bg-ink border border-black shadow-lg;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Hormati pengguna yang meminta gerakan minim (prefers-reduced-motion).
+   Matikan animasi dekoratif & transisi yang berlebihan. */
+@media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-ping,
+    .animate-blob {
+        animation: none !important;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
     }
 }

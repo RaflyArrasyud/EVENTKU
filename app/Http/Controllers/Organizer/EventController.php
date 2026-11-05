@@ -29,6 +29,14 @@ class EventController extends Controller
             $data['poster'] = $request->file('poster')->store('posters', 'public');
         }
 
+        if ($request->hasFile('logo_sponsor')) {
+            $data['logo_sponsor'] = $request->file('logo_sponsor')->store('posters', 'public');
+        }
+
+        if ($request->hasFile('foto_pembicara')) {
+            $data['foto_pembicara'] = $request->file('foto_pembicara')->store('speakers', 'public');
+        }
+
         Event::create($data);
 
         return redirect()->route('organizer.events.index')
@@ -49,6 +57,14 @@ class EventController extends Controller
 
         if ($request->hasFile('poster')) {
             $data['poster'] = $request->file('poster')->store('posters', 'public');
+        }
+
+        if ($request->hasFile('logo_sponsor')) {
+            $data['logo_sponsor'] = $request->file('logo_sponsor')->store('posters', 'public');
+        }
+
+        if ($request->hasFile('foto_pembicara')) {
+            $data['foto_pembicara'] = $request->file('foto_pembicara')->store('speakers', 'public');
         }
 
         $event->update($data);
@@ -81,6 +97,10 @@ class EventController extends Controller
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after:tanggal_mulai',
             'poster' => 'nullable|image|max:2048',
+            'logo_sponsor' => 'nullable|image|max:2048',
+            'pembicara' => 'nullable|string|max:255',
+            'peran_pembicara' => 'nullable|string|max:255',
+            'foto_pembicara' => 'nullable|image|max:2048',
             'status' => 'required|in:draft,terbit',
         ]);
     }

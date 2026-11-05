@@ -18,6 +18,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'trust_proxy_headers' => env('TRUST_PROXY_HEADERS', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

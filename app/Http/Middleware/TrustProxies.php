@@ -14,6 +14,17 @@ class TrustProxies extends Middleware
      */
     protected $proxies;
 
+    public function handle(Request $request, \Closure $next)
+    {
+        // Railway's managed edge is the only public ingress to the container.
+        // Local development keeps Laravel's default trust policy.
+        if (config('app.trust_proxy_headers', false)) {
+            $this->proxies = '*';
+        }
+
+        return parent::handle($request, $next);
+    }
+
     /**
      * The headers that should be used to detect proxies.
      *
